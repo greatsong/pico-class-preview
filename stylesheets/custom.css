@@ -328,7 +328,7 @@ summary:focus-visible {
 
 /* Pygments 구문 강조 — 다크 테마 (라이트/다크 모드 공통) */
 .highlight .hll { background-color: #334155; }
-.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .ch { color: #64748b; font-style: italic; }  /* 주석 */
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .ch { color: #93c5fd; font-style: italic; }  /* 주석 — 교육용이라 잘 보이게 */
 .highlight .k, .highlight .kn, .highlight .kd, .highlight .kp, .highlight .kr { color: #c084fc; font-weight: 600; }  /* 키워드 */
 .highlight .nb, .highlight .bp { color: #22d3ee; }  /* 내장 함수 */
 .highlight .nf, .highlight .fm { color: #34d399; }  /* 함수명 */
