@@ -1,0 +1,2010 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Raspberry Pi Pico 2 WH를 활용한 학교 전자담배 감지 시스템 프로젝트 6주 수업 프리뷰">
+      
+      
+        <meta name="author" content="신정규 · 경기SW미래채움교육센터 (EduFlow)">
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../week02/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>1주차: 문제 인식과 Pico 만나기 - Pico 전자담배 감지 시스템 — 수업 프리뷰</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Sans KR";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-pico" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href=".." title="Pico 전자담배 감지 시스템 — 수업 프리뷰" class="md-header__button md-logo" aria-label="Pico 전자담배 감지 시스템 — 수업 프리뷰" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pico 전자담배 감지 시스템 — 수업 프리뷰
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1주차: 문제 인식과 Pico 만나기
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="green"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="green"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="공유" aria-label="공유" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Part 1 - 기초 다지기
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../week03/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Part 2 - 핵심 기능 구현
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../week05/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Part 3 - 완성과 공유
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pico 전자담배 감지 시스템 — 수업 프리뷰" class="md-nav__button md-logo" aria-label="Pico 전자담배 감지 시스템 — 수업 프리뷰" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pico 전자담배 감지 시스템 — 수업 프리뷰
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 - 기초 다지기
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 1 - 기초 다지기
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1주차: 문제 인식과 Pico 만나기
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1주차: 문제 인식과 Pico 만나기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기본 정보
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        학습목표
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        타임라인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상세 수업 진행
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="상세 수업 진행">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1교시: 문제 정의 &amp; 프로젝트 소개
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1교시: 문제 정의 &amp; 프로젝트 소개">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#00-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        도입 &amp; 아이스브레이킹 (00-10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전자담배 문제 인식 활동 (10-25분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 전체 소개 &amp; 시스템 개념 (25-40분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#40-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        문제 정의 캔버스 작성 (40-50분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pico-2-wh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2교시: Pico 2 WH 첫 만남
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2교시: Pico 2 WH 첫 만남">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pico-2-wh-00-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pico 2 WH 하드웨어 소개 (00-10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thonny-ide-10-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thonny IDE 설정 &amp; 연결 (10-20분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#led-20-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        첫 코드 실행 — 내장 LED (20-35분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#led-35-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        브레드보드 &amp; 외부 LED 연결 (35-50분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3교시: LED 제어 실습 &amp; 정리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3교시: LED 제어 실습 &amp; 정리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#led-blink-00-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LED 깜빡이기 — Blink (00-15분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#led-15-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        두 개의 LED 교차 제어 (15-30분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        도전과제 &amp; 자유 실험 (30-40분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#40-50_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        오늘 배운 것 정리 &amp; 다음 주 예고 (40-50분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        교사용 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        교사용 사전 준비 메모
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2주차: 센서 읽기 — MQ-2 가스 센서의 세계
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 - 핵심 기능 구현
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 2 - 핵심 기능 구현
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week03/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    3주차: 판단 로직 — 감지 알고리즘과 경고 시스템
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week04/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    4주차: 연결의 힘 — Wi-Fi와 MQTT 통신
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 - 완성과 공유
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Part 3 - 완성과 공유
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week05/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    5주차: 눈에 보이는 데이터 — 대시보드와 알림
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week06/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    6주차: 완성과 공유 — 테스트, 발표, 성찰
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        기본 정보
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        학습목표
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        타임라인
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        상세 수업 진행
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="상세 수업 진행">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1교시: 문제 정의 &amp; 프로젝트 소개
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1교시: 문제 정의 &amp; 프로젝트 소개">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#00-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        도입 &amp; 아이스브레이킹 (00-10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        전자담배 문제 인식 활동 (10-25분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        프로젝트 전체 소개 &amp; 시스템 개념 (25-40분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#40-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        문제 정의 캔버스 작성 (40-50분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-pico-2-wh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2교시: Pico 2 WH 첫 만남
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2교시: Pico 2 WH 첫 만남">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pico-2-wh-00-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pico 2 WH 하드웨어 소개 (00-10분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thonny-ide-10-20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Thonny IDE 설정 &amp; 연결 (10-20분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#led-20-35" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        첫 코드 실행 — 내장 LED (20-35분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#led-35-50" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        브레드보드 &amp; 외부 LED 연결 (35-50분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-led" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3교시: LED 제어 실습 &amp; 정리
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3교시: LED 제어 실습 &amp; 정리">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#led-blink-00-15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        LED 깜빡이기 — Blink (00-15분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#led-15-30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        두 개의 LED 교차 제어 (15-30분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#30-40" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        도전과제 &amp; 자유 실험 (30-40분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#40-50_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        오늘 배운 것 정리 &amp; 다음 주 예고 (40-50분)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        교사용 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        교사용 사전 준비 메모
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="네비게이션" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href=".." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Part 1 - 기초 다지기
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1-pico">1주차: 문제 정의 &amp; Pico 입문<a class="headerlink" href="#1-pico" title="Permanent link">&para;</a></h1>
+<h2 id="_1">기본 정보<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>주제</td>
+<td>학교 전자담배 문제 인식 &amp; Raspberry Pi Pico 2 WH 첫 만남</td>
+</tr>
+<tr>
+<td>시간</td>
+<td>3시간 (150분 수업 + 쉬는 시간 20분)</td>
+</tr>
+<tr>
+<td>형태</td>
+<td>2인 1조</td>
+</tr>
+<tr>
+<td>준비물</td>
+<td>Pico 2 WH (조별 1대), USB-C 케이블, 브레드보드, LED 2개(빨강·초록), 220Ω 저항 2개, 점퍼 와이어 M-M 6개, 노트북 (조별 1대, Thonny 사전 설치)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">학습목표<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ol>
+<li>학교 내 전자담배 흡연 문제의 심각성을 인식하고, 기술적 해결 방안을 구상할 수 있다.</li>
+<li>Raspberry Pi Pico 2 WH의 구조와 핀 배치를 이해하고, Thonny IDE에서 MicroPython 코드를 실행할 수 있다.</li>
+<li>GPIO를 이용하여 LED를 켜고 끄는 프로그램을 작성할 수 있다.</li>
+<li>센서 → 판단 → 반응의 기본 흐름을 설명할 수 있다.</li>
+</ol>
+<h2 id="_3">타임라인<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>[1교시: 50분]</strong> 문제 정의 &amp; 프로젝트 소개</li>
+<li>00-10분: 아이스브레이킹 &amp; 조 편성</li>
+<li>10-25분: 전자담배 문제 인식 활동</li>
+<li>25-40분: 프로젝트 전체 소개 &amp; 시스템 개념</li>
+<li>40-50분: 문제 정의 캔버스 작성</li>
+<li><strong>[쉬는 시간: 10분]</strong></li>
+<li><strong>[2교시: 50분]</strong> Pico 2 WH 첫 만남</li>
+<li>00-10분: Pico 2 WH 하드웨어 소개</li>
+<li>10-20분: Thonny IDE 설정 &amp; 연결</li>
+<li>20-35분: 첫 코드 실행 (내장 LED)</li>
+<li>35-50분: 브레드보드 &amp; 외부 LED 연결</li>
+<li><strong>[쉬는 시간: 10분]</strong></li>
+<li><strong>[3교시: 50분]</strong> LED 제어 실습 &amp; 정리</li>
+<li>00-15분: LED 깜빡이기 (Blink)</li>
+<li>15-30분: 두 개의 LED 교차 제어</li>
+<li>30-40분: 도전과제 &amp; 자유 실험</li>
+<li>40-50분: 오늘 배운 것 정리 &amp; 다음 주 예고</li>
+</ul>
+<hr />
+<h2 id="_4">상세 수업 진행<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<hr />
+<h3 id="1">1교시: 문제 정의 &amp; 프로젝트 소개<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<hr />
+<h4 id="00-10">도입 &amp; 아이스브레이킹 (00-10분)<a class="headerlink" href="#00-10" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "안녕하세요, 여러분! 오늘부터 6주 동안 정말 특별한 프로젝트를 함께 할 거예요. 그 전에 먼저 짝을 정해볼게요."</p>
+<p>(조 편성 — 미리 짝을 정해두거나, 번호순/자율 선택)</p>
+<p>선생님: "자, 짝이랑 인사하세요. 앞으로 6주 동안 이 짝이 여러분의 '개발 파트너'예요. 실제 IT 회사에서도 '페어 프로그래밍'이라고 해서 두 명이 한 컴퓨터로 같이 코딩하거든요. 한 명이 코드를 치면, 다른 한 명이 옆에서 실수를 잡아주고 아이디어를 내는 거예요."</p>
+<p>선생님: "오늘 수업 시작하기 전에 질문 하나 할게요. 혹시 우리 학교에서 전자담배 때문에 문제가 된 적 있다는 거 알고 있는 사람?"</p>
+<p>(학생 반응을 기다림)</p>
+<p>선생님: "네, 사실 이건 우리 학교만의 문제가 아니라 전국적으로 심각한 문제예요. 오늘은 이 문제를 여러분이 직접 기술로 해결해보는 프로젝트를 시작합니다."</p>
+<hr />
+<h4 id="10-25">전자담배 문제 인식 활동 (10-25분)<a class="headerlink" href="#10-25" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "먼저, 전자담배가 왜 문제인지부터 살펴볼게요."</p>
+<p>(화면에 통계 자료 또는 뉴스 기사 제시)</p>
+<p>선생님: "청소년건강행태조사에 따르면, 고등학생 전자담배 사용률이 매년 증가하고 있어요. 그런데 왜 학교에서 잡기가 어려울까요? 짝이랑 1분 동안 이야기해보세요."</p>
+<p>(1분 토의)</p>
+<p>선생님: "자, 나와볼 사람? 왜 전자담배는 잡기 어려운 걸까요?"</p>
+<p>학생 A: "냄새가 별로 안 나요."</p>
+<p>학생 B: "연기가 금방 사라져요."</p>
+<p>학생 C: "화재 감지기가 안 울려요."</p>
+<p>선생님: "맞아요! 정확해요. 기존 담배는 연기가 나고 냄새가 강해서 바로 알 수 있는데, 전자담배는 에어로졸이라는 아주 미세한 입자를 만들어내요. 이게 빠르게 퍼져서 사라지거든요. 그래서 기존 화재감지기로는 못 잡아요."</p>
+<p>선생님: "그럼 질문을 바꿔볼게요. 만약 눈에 안 보이고, 냄새도 잘 안 나는 전자담배 연기를 잡으려면... 뭘 써야 할까요?"</p>
+<p>(학생들 생각하게 잠시 기다림)</p>
+<p>선생님: "힌트를 줄게요. 우리 코가 냄새를 맡잖아요? 기계에도 코 같은 게 있어요. 그게 바로 '가스 센서'예요."</p>
+<div class="mermaid">flowchart LR
+    A["👃 코 (냄새)"] --&gt; D["🔴 가스 센서 (MQ-2)"]
+    B["👁 눈 (연기)"] --&gt; E["📷 미세먼지 센서"]
+    C["🖐 손 (열기)"] --&gt; F["🌡 온도 센서"]
+
+    style A fill:#fef3c7,stroke:#f59e0b
+    style B fill:#fef3c7,stroke:#f59e0b
+    style C fill:#fef3c7,stroke:#f59e0b
+    style D fill:#dbeafe,stroke:#3b82f6
+    style E fill:#dbeafe,stroke:#3b82f6
+    style F fill:#dbeafe,stroke:#3b82f6</div>
+<p>선생님: "우리 프로젝트에서는 MQ-2라는 가스 센서를 사용할 거예요. 이 센서가 전자담배 증기 속의 화학 물질에 반응해서 '여기서 누가 전자담배 피웠다!' 하고 알려주는 거죠."</p>
+<hr />
+<h4 id="25-40">프로젝트 전체 소개 &amp; 시스템 개념 (25-40분)<a class="headerlink" href="#25-40" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "그럼 6주 동안 우리가 뭘 만들 건지 전체 그림을 보여줄게요."</p>
+<div class="mermaid">flowchart TB
+    subgraph 감지 장치
+        A1["화장실A&lt;br/&gt;MQ-2 + Pico + LED/부저"]
+        A2["화장실B&lt;br/&gt;MQ-2 + Pico + LED/부저"]
+        A3["계단실&lt;br/&gt;MQ-2 + Pico + LED/부저"]
+    end
+
+    A1 --&gt;|Wi-Fi| S["관제 서버&lt;br/&gt;(MQTT 브로커)"]
+    A2 --&gt;|Wi-Fi| S
+    A3 --&gt;|Wi-Fi| S
+    S --&gt; D["웹 대시보드 + 알림&lt;br/&gt;교무실 PC / 스마트폰"]
+
+    style S fill:#dbeafe,stroke:#3b82f6
+    style D fill:#dcfce7,stroke:#22c55e</div>
+<p>선생님: "학교 여기저기에 센서를 설치하고, 각 센서가 Wi-Fi로 데이터를 보내면, 중앙 서버에서 한 번에 모니터링하는 거예요. 누가 어디서 전자담배를 피우면 바로 선생님 폰으로 알림이 오는 시스템이에요."</p>
+<p>선생님: "이걸 6주에 걸쳐서 하나씩 만들어 갈 거예요."</p>
+<div class="mermaid">flowchart LR
+    W1["1주차&lt;br/&gt;문제 정의&lt;br/&gt;+Pico"] --&gt; W2["2주차&lt;br/&gt;센서 읽기&lt;br/&gt;MQ-2"] --&gt; W3["3주차&lt;br/&gt;판단 로직&lt;br/&gt;경고"]
+    W3 --&gt; W4["4주차&lt;br/&gt;Wi-Fi&lt;br/&gt;MQTT"] --&gt; W5["5주차&lt;br/&gt;대시보드&lt;br/&gt;알림"] --&gt; W6["6주차&lt;br/&gt;테스트&lt;br/&gt;발표·성찰"]
+
+    style W1 fill:#fef3c7,stroke:#f59e0b
+    style W2 fill:#dbeafe,stroke:#3b82f6
+    style W3 fill:#dcfce7,stroke:#22c55e
+    style W4 fill:#e0e7ff,stroke:#6366f1
+    style W5 fill:#fce7f3,stroke:#ec4899
+    style W6 fill:#f3e8ff,stroke:#a855f7</div>
+<p>선생님: "오늘은 1주차니까, 문제를 정의하고, Pico라는 작은 컴퓨터를 처음 만나볼 거예요. LED를 깜빡이는 것부터 시작합니다."</p>
+<p>선생님: "혹시 '나는 코딩 완전 못하는데...' 하는 사람?"</p>
+<p>(몇 명 손 들면)</p>
+<p>선생님: "걱정 마세요. 완전 처음부터 시작합니다. 그리고 짝이 있잖아요. 둘이서 머리 맞대면 혼자보다 훨씬 잘 됩니다."</p>
+<hr />
+<h4 id="40-50">문제 정의 캔버스 작성 (40-50분)<a class="headerlink" href="#40-50" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "자, 이제 짝이랑 같이 '문제 정의 캔버스'를 작성해볼게요. 기술로 문제를 해결하려면, 먼저 문제를 정확히 정의하는 게 가장 중요해요."</p>
+<p>(활동지 배부)</p>
+<blockquote>
+<p><strong>문제 정의 캔버스</strong></p>
+<p>조: <strong><em>조 &nbsp;&nbsp; 이름: </em></strong><strong><em>_</em></strong>, <strong><em>_</em></strong>___</p>
+<p><strong>1. 문제는 무엇인가?</strong>
+(학교에서 전자담배가 문제인 이유를 구체적으로 적어보세요)</p>
+<p><strong>2. 왜 해결이 어려운가?</strong>
+(기존 방법으로 안 되는 이유)</p>
+<p><strong>3. 우리의 해결 아이디어</strong>
+(센서를 어디에, 어떻게 쓸 것인지)</p>
+<p><strong>4. 성공하면 어떤 변화?</strong>
+(이 시스템이 완성되면 뭐가 달라질까)</p>
+<p><strong>5. 걱정되는 점</strong>
+(기술적 한계, 윤리적 우려 등)</p>
+</blockquote>
+<p>선생님: "5분 동안 짝이랑 같이 작성해보세요. 정답이 없는 거예요. 여러분 생각을 자유롭게 적으면 됩니다."</p>
+<p>(5분 작성 시간)</p>
+<p>선생님: "다 적었으면, 5번 '걱정되는 점'에 뭐라고 적었는지 한 조만 발표해볼까요?"</p>
+<p>학생: "센서가 방귀에도 반응하면 어떡하죠?"</p>
+<p>선생님: "(웃으며) 아주 좋은 질문이에요! 진짜로 MQ-2 센서는 메탄가스에도 반응해요. 그래서 3주차에 '어떻게 구분할 것인가'를 다룰 거예요. 이런 걱정이 바로 좋은 문제 정의예요."</p>
+<p>학생: "학생 인권 침해 아니에요? 감시카메라 같은 거잖아요."</p>
+<p>선생님: "이것도 정말 중요한 포인트예요. 6주차에 이 주제로 깊이 있게 토론할 거예요. 지금은 '걱정되는 점'에 꼭 적어두세요."</p>
+<p><strong>[수업 장면: 문제 정의의 힘]</strong></p>
+<p>지훈이와 서연이 조가 캔버스를 작성하고 있다.</p>
+<p>서연: "3번에 뭐라고 쓰지? 센서를 화장실에 달면 되는 거 아니야?"</p>
+<p>지훈: "근데 화장실 몇 개야? 전부 다 달아야 하나?"</p>
+<p>서연: "그러면 돈이 엄청 들겠다..."</p>
+<p>지훈: "아, 그러면 '가장 문제가 많은 곳부터 설치한다'라고 쓰자."</p>
+<p>선생님이 지나가며: "좋은 생각이에요. 실제 엔지니어도 예산 안에서 가장 효과적인 곳부터 설치하거든요. 그게 바로 '우선순위 설정'이에요."</p>
+<hr />
+<h3 id="2-pico-2-wh">2교시: Pico 2 WH 첫 만남<a class="headerlink" href="#2-pico-2-wh" title="Permanent link">&para;</a></h3>
+<hr />
+<h4 id="pico-2-wh-00-10">Pico 2 WH 하드웨어 소개 (00-10분)<a class="headerlink" href="#pico-2-wh-00-10" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "자, 이제 진짜 하드웨어를 만져볼 시간이에요! 각 조에 나눠준 이 작은 보드가 바로 Raspberry Pi Pico 2 WH예요."</p>
+<p>(실물을 들어 보이며)</p>
+<p>선생님: "이 작은 보드가 컴퓨터예요. 진짜 컴퓨터. CPU도 있고, 메모리도 있고, 심지어 Wi-Fi까지 돼요. 가격은 약 12,000원밖에 안 해요."</p>
+<p>선생님: "이름이 좀 길죠? 하나씩 풀어볼게요."</p>
+<ul>
+<li><strong>Raspberry Pi</strong> — 만든 회사 (영국)</li>
+<li><strong>Pico</strong> — 작다 (Pico = 아주 작은)</li>
+<li><strong>2</strong> — 2세대</li>
+<li><strong>W</strong> — Wi-Fi 무선 기능</li>
+<li><strong>H</strong> — 핀이 미리 납땜되어 있음 (Header)</li>
+</ul>
+<p>선생님: "'H'가 중요해요. Header의 H인데, 이 금색 핀들이 미리 납땜되어 있다는 뜻이에요. 이게 없으면 우리가 직접 납땜해야 해서 훨씬 어려워요."</p>
+<p>선생님: "핀 배치도를 나눠줄게요. 이 프로젝트 내내 참고할 자료예요."</p>
+<div class="hw-diagram" data-type="pico-pinout"
+     data-highlight='[
+       {"pin":"GP15","label":"빨간 LED","color":"#ef4444"},
+       {"pin":"GP16","label":"초록 LED / 부저","color":"#22c55e"},
+       {"pin":"GP26","label":"MQ-2 센서 (ADC0)","color":"#f59e0b"}
+     ]'>
+</div>
+
+<p>선생님: "별표 친 핀을 주목하세요. GP15는 LED, GP16은 부저, GP26은 센서에 연결할 거예요. 지금 당장 외울 필요 없고, 이 표를 프로젝트 내내 옆에 놓고 보면 돼요."</p>
+<p>선생님: "중요한 용어 하나만 알고 가죠. 'GPIO'라고 읽는데, General Purpose Input/Output의 약자예요. 한국어로 하면 '범용 입출력 핀'. 쉽게 말하면 '아무거나 연결할 수 있는 핀'이에요."</p>
+<hr />
+<h4 id="thonny-ide-10-20">Thonny IDE 설정 &amp; 연결 (10-20분)<a class="headerlink" href="#thonny-ide-10-20" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "Pico에 프로그램을 넣으려면 도구가 필요해요. 우리는 Thonny라는 프로그램을 쓸 거예요. 이미 설치되어 있죠?"</p>
+<p>(사전에 학생 노트북에 Thonny 설치 완료 상태)</p>
+<p>선생님: "자, 저를 따라 하세요. 하나씩 천천히 갈게요."</p>
+<p>선생님: "첫 번째, Pico를 USB-C 케이블로 노트북에 연결하세요. 아직 Thonny는 안 켜도 돼요."</p>
+<p>(학생들 연결)</p>
+<p>선생님: "두 번째, Thonny를 여세요."</p>
+<p>선생님: "세 번째, Thonny 오른쪽 아래를 보세요. 'Python 3' 또는 'Local Python 3'이라고 되어 있을 거예요. 거기를 클릭해서 'MicroPython (Raspberry Pi Pico)'로 바꿔주세요."</p>
+<p>선생님: "하단 Shell 영역에 '&gt;&gt;&gt;' 표시가 나오면 성공이에요! Pico랑 연결된 거예요."</p>
+<p>선생님: "혹시 연결 안 되는 조?"</p>
+<p>(트러블슈팅 진행)</p>
+<p><strong>[예상 Q&amp;A]</strong></p>
+<ul>
+<li><strong>Q</strong>: "Thonny 오른쪽 아래에 Pico가 안 보여요."</li>
+<li>
+<p><strong>A</strong>: "USB 케이블을 뽑았다가 다시 꽂아보세요. 그래도 안 되면 Thonny를 껐다가 다시 켜보세요. 간혹 충전 전용 케이블이면 데이터 전송이 안 돼요 — 다른 케이블로 바꿔보세요."</p>
+</li>
+<li>
+<p><strong>Q</strong>: "COM 포트가 여러 개 나와요."</p>
+</li>
+<li>
+<p><strong>A</strong>: "Pico USB를 뽑았을 때 사라지는 COM 포트가 Pico예요. 그걸 선택하세요."</p>
+</li>
+<li>
+<p><strong>Q</strong>: "'MicroPython (Raspberry Pi Pico)'가 목록에 없어요."</p>
+</li>
+<li><strong>A</strong>: "Thonny 버전이 낮을 수 있어요. 도구 &gt; 옵션 &gt; 인터프리터에서 'Raspberry Pi Pico'를 선택하고, 'Install or update MicroPython' 버튼을 눌러서 펌웨어를 설치하세요."</li>
+</ul>
+<hr />
+<h4 id="led-20-35">첫 코드 실행 — 내장 LED (20-35분)<a class="headerlink" href="#led-20-35" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "자, 드디어 코드를 쳐볼 거예요! 프로그래밍 인생의 첫 코드입니다."</p>
+<p>선생님: "Thonny 위쪽 편집 영역에 이 코드를 그대로 따라 치세요. 철자 하나도 틀리면 안 되니까 천천히, 정확하게 치세요."</p>
+<p><strong>[코드: step1_내장led_켜기.py]</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># ============================================</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># step1_내장led_켜기.py</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Pico 2 WH의 내장 LED를 켜는 첫 번째 코드</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># ============================================</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># === 무엇을 하는 코드인지 (WHAT) ===</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Pico 보드 위에 있는 작은 초록색 LED를 켜는 코드예요</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># --- 왜 필요한지 (WHY) ---</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Pico가 제대로 작동하는지 확인하는 가장 쉬운 방법이에요</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># 하드웨어 세계의 &quot;Hello, World!&quot;와 같아요</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>    <span class="c1"># machine 모듈에서 Pin 기능을 가져옴</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="s2">&quot;LED&quot;</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>  <span class="c1"># 내장 LED를 출력(OUT) 모드로 설정</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="n">led</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>                   <span class="c1"># LED 켜기!</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="c1"># 실행 후 Pico 보드의 작은 LED가 켜지면 성공!</span>
+</span></code></pre></div>
+<p>선생님: "다 쳤으면 위쪽 초록색 ▶ 버튼을 눌러보세요. 또는 F5를 눌러도 돼요."</p>
+<p>(학생들 실행)</p>
+<p>선생님: "Pico 보드를 봐보세요. 작은 LED가 켜졌죠?"</p>
+<p><strong>[수업 장면: 첫 성공]</strong></p>
+<p>민수가 코드를 실행하자 Pico 보드의 작은 초록 LED가 켜진다.</p>
+<p>민수: "어? 켜졌어요!"</p>
+<p>유진: "진짜네! 이거 코드 세 줄로 된 거야?"</p>
+<p>선생님: "축하해요! 여러분이 방금 하드웨어를 프로그래밍한 거예요. 코드 한 줄이 실제 물리적인 LED를 켜는 거, 신기하지 않아요?"</p>
+<p>민수: "이거 끄려면요?"</p>
+<p>선생님: "좋은 질문! <code>led.off()</code>라고 쳐보세요."</p>
+<p>선생님: "이제 LED를 껐다 켰다 반복하는 코드를 만들어볼게요."</p>
+<p><strong>[코드: step2_내장led_깜빡이기.py]</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># ============================================</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1"># step2_내장led_깜빡이기.py</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Pico 2 WH의 내장 LED를 반복적으로 깜빡이기</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># ============================================</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="c1"># === 무엇을 하는 코드인지 (WHAT) ===</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1"># LED를 1초마다 켰다 껐다 반복하는 코드예요</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># 하드웨어 세계에서 이걸 &quot;Blink&quot;라고 불러요</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># --- 왜 필요한지 (WHY) ---</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># 반복(loop)과 시간 지연(sleep)을 배우는 가장 기본적인 실습이에요</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>    <span class="c1"># Pin 기능 가져오기</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="kn">import</span> <span class="nn">time</span>                <span class="c1"># 시간 관련 기능 가져오기 (sleep 사용)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="s2">&quot;LED&quot;</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>  <span class="c1"># 내장 LED를 출력 모드로 설정</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="c1"># 무한 반복! (Ctrl+C로 멈출 수 있어요)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>                <span class="c1"># True인 동안 계속 반복 = 영원히 반복</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="n">led</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>               <span class="c1"># LED 켜기</span>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>          <span class="c1"># 1초 기다리기</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="n">led</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>              <span class="c1"># LED 끄기</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>          <span class="c1"># 1초 기다리기</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="c1"># 멈추려면: Thonny의 빨간 ■ 정지 버튼 또는 Ctrl+C</span>
+</span></code></pre></div>
+<p>선생님: "실행해보세요. LED가 1초 간격으로 깜빡이죠?"</p>
+<p>선생님: "여기서 <code>time.sleep(1)</code>의 숫자를 바꿔보세요. 0.1로 바꾸면 어떻게 될까요?"</p>
+<p>(학생들 실험)</p>
+<p>학생: "엄청 빨리 깜빡여요!"</p>
+<p>선생님: "맞아요! sleep 안의 숫자가 '초'예요. 0.1이면 0.1초, 즉 아주 빠르게 깜빡이는 거죠. 이렇게 숫자 하나만 바꿔도 동작이 달라지는 게 프로그래밍의 재미예요."</p>
+<p><strong>[예상 Q&amp;A]</strong></p>
+<ul>
+<li><strong>Q</strong>: "while True가 뭐예요? 왜 True예요?"</li>
+<li>
+<p><strong>A</strong>: "while은 '~하는 동안 반복해'라는 뜻이에요. True는 '항상 참'이니까 '항상 반복해' = 무한 반복이 되는 거예요. 나중에 센서 값을 계속 읽어야 할 때도 이 구조를 쓸 거예요."</p>
+</li>
+<li>
+<p><strong>Q</strong>: "멈추려면 어떻게 해요?"</p>
+</li>
+<li>
+<p><strong>A</strong>: "Thonny의 빨간 정지 버튼 ■을 누르거나, Shell에서 Ctrl+C를 누르세요."</p>
+</li>
+<li>
+<p><strong>Q</strong>: "from machine import Pin이 뭐예요?"</p>
+</li>
+<li><strong>A</strong>: "machine이라는 도구 상자에서 Pin이라는 도구를 꺼내는 거예요. Pico의 핀을 제어하려면 이 도구가 필요해요."</li>
+</ul>
+<hr />
+<h4 id="led-35-50">브레드보드 &amp; 외부 LED 연결 (35-50분)<a class="headerlink" href="#led-35-50" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "이제 내장 LED 말고, 우리가 직접 LED를 연결해볼 거예요. 이때 쓰는 게 이 흰색 판이에요. '브레드보드'라고 해요."</p>
+<p>(브레드보드 실물을 들어 보이며)</p>
+<p>선생님: "브레드보드의 구멍들은 안쪽에서 연결되어 있어요. 이걸 이해하는 게 중요해요."</p>
+<div class="hw-diagram" data-type="breadboard">
+</div>
+
+<p>선생님: "가운데 홈을 기준으로 좌우가 분리돼 있어요. a-b-c-d-e는 서로 연결되고, f-g-h-i-j는 서로 연결되지만, e와 f는 연결이 안 돼요."</p>
+<p>선생님: "이제 빨간 LED를 GP15에 연결해볼게요."</p>
+<div class="hw-diagram" data-type="connection"
+     data-title="빨간 LED 연결 회로도"
+     data-connections='[
+       {"from":"GP15","to":"220Ω 저항","then":"빨간 LED (+, 긴 다리)","color":"#ef4444"},
+       {"from":"GND","to":"빨간 LED (-, 짧은 다리)","color":"#6b7280"}
+     ]'
+     data-notes='["LED에는 방향이 있어요! 긴 다리(+)가 저항 쪽, 짧은 다리(-)가 GND 쪽","저항 없이 LED를 바로 연결하면 과전류로 LED가 타요","저항은 방향이 없어요 — 어느 쪽으로 꽂든 상관없어요"]'>
+</div>
+
+<p>선생님: "LED에는 방향이 있어요. 다리가 긴 쪽이 +, 짧은 쪽이 -예요. 거꾸로 꽂으면 안 켜져요. 하지만 고장 나지는 않으니까 걱정 마세요."</p>
+<p>선생님: "그리고 저항을 꼭 연결해야 해요. 저항 없이 LED를 바로 연결하면 과전류가 흘러서 LED가 타버릴 수 있어요."</p>
+<p>선생님: "자, 이제 짝이랑 역할을 나누세요. 한 명이 회로를 연결하고, 다른 한 명이 회로도를 보면서 확인해주세요."</p>
+<p>(학생들 회로 연결 — 선생님 순회하며 확인)</p>
+<p><strong>[예상 Q&amp;A]</strong></p>
+<ul>
+<li><strong>Q</strong>: "저항 방향도 있어요?"</li>
+<li>
+<p><strong>A</strong>: "저항은 방향이 없어요! 어느 쪽으로 꽂든 똑같이 동작해요. LED만 방향 주의하세요."</p>
+</li>
+<li>
+<p><strong>Q</strong>: "LED 안 켜져요."</p>
+</li>
+<li>
+<p><strong>A</strong>: "체크리스트를 확인해보세요. ① LED 방향 맞나요? (긴 다리가 + 쪽) ② 저항이 연결되어 있나요? ③ GND가 연결되어 있나요? ④ 브레드보드에 같은 행에 꽂았나요?"</p>
+</li>
+<li>
+<p><strong>Q</strong>: "220옴 저항을 어떻게 구분해요?"</p>
+</li>
+<li><strong>A</strong>: "저항에 색띠가 있어요. 빨강-빨강-갈색-금색이면 220Ω이에요. 이 수업에서는 선생님이 미리 분류해놨으니 나눠준 저항을 그대로 쓰면 돼요."</li>
+</ul>
+<hr />
+<h3 id="3-led">3교시: LED 제어 실습 &amp; 정리<a class="headerlink" href="#3-led" title="Permanent link">&para;</a></h3>
+<hr />
+<h4 id="led-blink-00-15">LED 깜빡이기 — Blink (00-15분)<a class="headerlink" href="#led-blink-00-15" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "회로 연결됐죠? 이제 코드로 외부 LED를 제어해봅시다."</p>
+<p><strong>[코드: step3_외부led_깜빡이기.py]</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># ============================================</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># step3_외부led_깜빡이기.py</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># 브레드보드에 연결한 외부 LED 깜빡이기</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1"># ============================================</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c1"># === 무엇을 하는 코드인지 (WHAT) ===</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="c1"># GP15에 연결한 빨간 LED를 깜빡이는 코드예요</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1"># --- 왜 필요한지 (WHY) ---</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="c1"># 내장 LED가 아닌, 우리가 직접 연결한 LED를 제어하는 거예요</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># 나중에 &#39;경고등&#39;으로 쓸 거예요 — 전자담배 감지되면 빨간불!</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># GP15 핀을 출력(OUT) 모드로 설정</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="c1"># 아까 내장 LED는 &quot;LED&quot;라고 썼지만, 외부 LED는 핀 번호를 써요</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">red_led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;빨간 LED 깜빡이기 시작!&quot;</span><span class="p">)</span>  <span class="c1"># Thonny Shell에 메시지 표시</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="n">red_led</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>           <span class="c1"># LED 켜기 (= red_led.value(1) 과 같음)</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LED ON&quot;</span><span class="p">)</span>        <span class="c1"># 상태 표시</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>        <span class="c1"># 0.5초 대기</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="n">red_led</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>          <span class="c1"># LED 끄기 (= red_led.value(0) 과 같음)</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LED OFF&quot;</span><span class="p">)</span>       <span class="c1"># 상태 표시</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>        <span class="c1"># 0.5초 대기</span>
+</span></code></pre></div>
+<p>선생님: "실행해보세요! 브레드보드의 빨간 LED가 깜빡이나요?"</p>
+<p>(학생들 실행)</p>
+<p>선생님: "Thonny 아래쪽 Shell에도 'LED ON', 'LED OFF'가 반복되는 거 보이죠? print()는 화면에 메시지를 띄우는 거예요. 나중에 센서 값을 확인할 때 아주 유용해요."</p>
+<p><strong>[수업 장면: 문제 해결]</strong></p>
+<p>준호와 소율이 조에서 LED가 안 켜진다.</p>
+<p>준호: "선생님, 코드 실행했는데 LED가 안 깜빡여요."</p>
+<p>선생님: "Shell에 뭐라고 나와요?"</p>
+<p>준호: "LED ON, LED OFF는 나와요."</p>
+<p>선생님: "그러면 코드는 맞는 거예요. 회로를 봐볼까? 소율아, LED 다리 어느 쪽이 긴 다리야?"</p>
+<p>소율: "...같은 것 같은데요?"</p>
+<p>선생님: "자세히 보면 하나가 살짝 길어요. 한번 LED를 뽑아서 반대로 꽂아보세요."</p>
+<p>(소율이 LED를 반대로 꽂자 깜빡이기 시작)</p>
+<p>준호: "와, 됐다!"</p>
+<p>선생님: "LED 방향이 반대였던 거예요. 이런 실수는 프로도 해요. 중요한 건 '안 되면 차근차근 확인하기'예요."</p>
+<hr />
+<h4 id="led-15-30">두 개의 LED 교차 제어 (15-30분)<a class="headerlink" href="#led-15-30" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "이번엔 LED 두 개를 써볼게요. 초록 LED를 하나 더 추가하세요. GP16에 연결합니다."</p>
+<div class="hw-diagram" data-type="connection"
+     data-title="2개 LED 연결 회로도"
+     data-connections='[
+       {"from":"GP15","to":"220Ω 저항","then":"빨간 LED (+)","color":"#ef4444"},
+       {"from":"GP16","to":"220Ω 저항","then":"초록 LED (+)","color":"#22c55e"},
+       {"from":"GND","to":"모든 LED의 (-)","color":"#6b7280"}
+     ]'>
+</div>
+
+<p>선생님: "회로 연결됐으면 이 코드를 입력하세요."</p>
+<p><strong>[코드: step4_두개_led_교차.py]</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># ============================================</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># step4_두개_led_교차.py</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># 빨간 LED와 초록 LED를 교대로 깜빡이기</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># ============================================</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1"># === 무엇을 하는 코드인지 (WHAT) ===</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1"># 빨간불과 초록불이 번갈아 켜지는 코드예요</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="c1"># 나중에 &quot;정상(초록) vs 경고(빨강)&quot; 상태를 표시하는 데 쓸 거예요!</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1"># --- 왜 필요한지 (WHY) ---</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1"># 전자담배 감지 시스템에서:</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="c1">#   초록 LED = &quot;공기 깨끗함, 정상&quot;</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="c1">#   빨간 LED = &quot;전자담배 감지! 경고!&quot;</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="n">red_led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>    <span class="c1"># 빨간 LED (경고용)</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="n">green_led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>  <span class="c1"># 초록 LED (정상 상태)</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== 전자담배 감지 시스템 LED 테스트 ===&quot;</span><span class="p">)</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;초록 = 정상 / 빨강 = 경고&quot;</span><span class="p">)</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="nb">print</span><span class="p">()</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>    <span class="c1"># 정상 상태: 초록 켜기, 빨강 끄기</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>    <span class="n">green_led</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="n">red_led</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;상태: 정상 (공기 깨끗)&quot;</span><span class="p">)</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>          <span class="c1"># 2초 유지</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="c1"># 경고 상태: 빨강 켜기, 초록 끄기</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="n">green_led</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="n">red_led</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;상태: 경고! 전자담배 감지!&quot;</span><span class="p">)</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>          <span class="c1"># 2초 유지</span>
+</span></code></pre></div>
+<p>선생님: "실행하면 초록-빨강-초록-빨강 번갈아 깜빡이죠? 이게 바로 우리 프로젝트의 기본 출력이에요. 나중에 센서가 연결되면, 센서 값에 따라 초록이냐 빨강이냐를 결정하는 거예요."</p>
+<p>선생님: "지금은 2초마다 그냥 번갈아 가는데, 다음 주부터는 '센서가 위험 신호를 보내면 빨간불'이 되도록 만들 거예요."</p>
+<p><strong>[예상 Q&amp;A]</strong></p>
+<ul>
+<li><strong>Q</strong>: "LED를 3개, 4개도 연결할 수 있어요?"</li>
+<li>
+<p><strong>A</strong>: "당연하죠! Pico에는 GPIO 핀이 26개나 있어요. 원하면 26개 LED도 가능해요. 다만 전류 제한이 있어서, 많이 연결할 때는 별도 전원이 필요할 수 있어요."</p>
+</li>
+<li>
+<p><strong>Q</strong>: "on()/off() 대신 value()를 써도 돼요?"</p>
+</li>
+<li><strong>A</strong>: "네! <code>red_led.value(1)</code>은 <code>red_led.on()</code>과 같고, <code>red_led.value(0)</code>은 <code>red_led.off()</code>와 같아요. 나중에 변수로 제어할 때 value()가 더 편할 수 있어요."</li>
+</ul>
+<hr />
+<h4 id="30-40">도전과제 &amp; 자유 실험 (30-40분)<a class="headerlink" href="#30-40" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "남은 시간은 자유 실험 시간이에요. 아래 도전과제 중에 하나를 골라서 짝이랑 같이 해보세요."</p>
+<p><strong>도전과제</strong></p>
+<ul>
+<li>
+<p><strong>⭐ Level 1: SOS 신호 만들기</strong> — LED로 모스부호 SOS (· · · — — — · · ·)를 표현해보세요. 힌트: 짧은 점멸 = 0.2초, 긴 점멸 = 0.6초</p>
+</li>
+<li>
+<p><strong>⭐⭐ Level 2: 경고 패턴 만들기</strong> — 빨간 LED를 빠르게 3번 깜빡이고 → 1초 쉬고 → 반복 (실제 경보기처럼 보이게 만들어보세요)</p>
+</li>
+<li>
+<p><strong>⭐⭐⭐ Level 3: 상태 표시기 만들기</strong> — 초록 3초 (안전) → 빨강 빠르게 5번 깜빡 (경고) → 반복. Shell에 현재 상태도 함께 출력하기</p>
+</li>
+</ul>
+<p>선생님: "Level 1부터 도전해보고, 되면 Level 2로 넘어가세요. 짝이랑 의논하면서 해보세요!"</p>
+<p><strong>[도전과제 Level 2 예시 답안 — 교사용]</strong></p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Level 2: 경고 패턴</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">red_led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="c1"># 빠르게 3번 깜빡이기</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>        <span class="c1"># 3번 반복</span>
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">red_led</span><span class="o">.</span><span class="n">on</span><span class="p">()</span>
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>       <span class="c1"># 0.1초 켜기</span>
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">red_led</span><span class="o">.</span><span class="n">off</span><span class="p">()</span>
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>       <span class="c1"># 0.1초 끄기</span>
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>
+</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># 1초 쉬기</span>
+</span></code></pre></div>
+<p><strong>[수업 장면: 협업]</strong></p>
+<p>하윤이와 재민이가 Level 3에 도전하고 있다.</p>
+<p>하윤: "초록 3초는 알겠는데, 빨강 빠르게 5번은 어떻게 해?"</p>
+<p>재민: "아까 while True 안에 for 쓰면 되지 않을까? 선생님이 Level 2 힌트에서 range 쓴다고 했잖아."</p>
+<p>하윤: "for i in range(5)? 한번 해보자."</p>
+<p>(코드를 실행하자 원하는 대로 동작)</p>
+<p>재민: "오, 된다! 근데 print도 넣어야 하는 거 아니야?"</p>
+<p>하윤: "맞다, '상태 표시기'니까. print('안전')이랑 print('경고!')를 넣자."</p>
+<hr />
+<h4 id="40-50_1">오늘 배운 것 정리 &amp; 다음 주 예고 (40-50분)<a class="headerlink" href="#40-50_1" title="Permanent link">&para;</a></h4>
+<p><strong>[강의 스크립트]</strong></p>
+<p>선생님: "자, 오늘 수업 정리해볼게요. 짝이랑 번갈아가면서 대답해보세요."</p>
+<p>선생님: "첫 번째 질문. 오늘 우리가 해결하려는 문제가 뭐였죠?"</p>
+<p>학생들: "학교 전자담배 흡연!"</p>
+<p>선생님: "두 번째. Pico에서 LED를 켜려면 어떤 코드를 쓰죠?"</p>
+<p>학생들: "led.on()!"</p>
+<p>선생님: "세 번째. LED를 계속 깜빡이게 하려면 어떤 구조를 쓰죠?"</p>
+<p>학생들: "while True!"</p>
+<p>선생님: "완벽해요."</p>
+<p><strong>오늘 배운 것 정리</strong></p>
+<ul>
+<li>전자담배 문제 정의 → 문제 정의 캔버스 작성</li>
+<li>Pico 2 WH 구조 이해 → GPIO 핀의 역할</li>
+<li>Thonny IDE 연결 → MicroPython 환경 설정</li>
+<li>내장 LED 제어 → <code>led.on()</code> / <code>led.off()</code></li>
+<li>외부 LED 연결 → 브레드보드 + 저항 + LED</li>
+<li>반복문 활용 → <code>while True</code> + <code>time.sleep()</code></li>
+<li><strong>핵심 키워드</strong>: GPIO, Pin, OUT, while True, sleep</li>
+</ul>
+<p><strong>[다음 주 예고]</strong></p>
+<p>선생님: "다음 주에는 드디어 센서를 연결합니다! MQ-2라는 가스 센서를 Pico에 연결해서, 공기 중의 가스 농도를 숫자로 읽어볼 거예요."</p>
+<p>선생님: "오늘 LED를 켜고 끄는 건 '출력'이었다면, 다음 주 센서 값을 읽는 건 '입력'이에요. 입력과 출력을 합치면 비로소 '센서로 읽고 → LED로 알려주는' 시스템이 되는 거죠."</p>
+<p>(MQ-2 센서 실물을 잠깐 보여주며)</p>
+<p>선생님: "이게 MQ-2예요. 이 동그란 금속 부분이 가스를 감지하는 부분이에요. 다음 주에 이걸 Pico에 연결하면 전자담배 증기를 감지할 수 있게 됩니다. 기대하세요!"</p>
+<p>선생님: "마지막으로, 오늘 작성한 문제 정의 캔버스는 꼭 보관하세요. 6주차 발표 때 다시 쓸 거예요."</p>
+<hr />
+<h2 id="_5">교사용 체크리스트<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 3시간 타임라인이 현실적인가? → 1교시(개념/토의) + 2교시(환경설정/첫코드) + 3교시(실습/도전)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 모든 코드가 복사-실행 가능한가? → step1~step4 모두 독립 실행 가능</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 초보자도 이해할 수 있는 스크립트인가? → 전문 용어 최소화, 비유 활용</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 예상 Q&amp;A가 5개 이상 있는가? → 총 9개</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 수업 장면 시나리오가 2개 이상 있는가? → 4개 (문제정의, 첫성공, 문제해결, 협업)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 다음 주와의 연결이 자연스러운가? → LED 출력 → 센서 입력으로 연결</li>
+</ul>
+<h2 id="_6">교사용 사전 준비 메모<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Thonny 사전 설치</strong>: 가능하면 수업 전 주에 학생 노트북에 Thonny 설치 완료. 설치 안내: https://thonny.org</li>
+<li><strong>Pico 펌웨어</strong>: MicroPython 펌웨어가 Pico에 미리 설치되어 있으면 좋음. Thonny에서 자동 설치도 가능하지만 시간이 걸림.</li>
+<li><strong>부품 사전 분류</strong>: 조별로 투명 지퍼백에 부품 세트를 미리 담아두면 나눠주기 편함.</li>
+<li><strong>여분 부품 준비</strong>: LED 5~10개, 저항 10개 정도 여분 준비 (분실/파손 대비).</li>
+<li><strong>USB 케이블 주의</strong>: 충전 전용 케이블은 데이터 전송이 안 됨. 데이터 전송 가능한 USB-C 케이블로 준비.</li>
+<li><strong>전자담배 통계 자료</strong>: 질병관리청 '청소년건강행태조사' 최신 자료를 PPT 또는 프린트로 준비.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 신정규 · 경기SW미래채움교육센터 | <a href='https://eduflow-greatsong.fly.dev/'>EduFlow</a>로 제작
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "navigation.indexes", "navigation.instant", "navigation.path", "search.suggest", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "content.tabs.link", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+        <script src="../javascripts/title-link.js"></script>
+      
+        <script src="../javascripts/mermaid-config.js"></script>
+      
+        <script src="../javascripts/scroll-progress.js"></script>
+      
+        <script src="../javascripts/circuit-diagrams.js"></script>
+      
+    
+  </body>
+</html>
