@@ -253,13 +253,34 @@ summary:focus-visible {
   box-shadow: var(--ef-shadow-sm);
   margin: 1.5rem 0;
   overflow: hidden;
+  background: #1e293b;
+}
+
+.md-typeset .highlight {
+  background: transparent;
+  border-radius: var(--ef-radius);
+}
+
+.md-typeset .highlight pre {
+  background: #1e293b;
+}
+
+/* 코드 블록 제목 (파일명 헤더) */
+.md-typeset .highlight .filename {
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid #334155;
+  letter-spacing: 0.02em;
 }
 
 .md-typeset code {
   border-radius: 6px;
   padding: 0.2em 0.45em;
   font-size: 0.87em;
-  background: linear-gradient(135deg, var(--ef-primary-light), var(--ef-primary-lighter));
+  background: var(--ef-primary-light);
   color: var(--ef-accent);
   border: 1px solid var(--ef-code-border);
   font-weight: 500;
@@ -267,29 +288,58 @@ summary:focus-visible {
 
 .md-typeset pre code {
   background: none;
-  color: inherit;
+  color: #e2e8f0;
   border: none;
   padding: 0;
   font-weight: normal;
 }
 
+/* 라이트모드에서도 코드 블록은 다크 배경 */
+.md-typeset .highlight pre code {
+  color: #e2e8f0;
+}
+
 [data-md-color-scheme="slate"] .md-typeset pre {
-  background: #1a1a2e !important;
-  border-color: #3a3a4e;
+  background: #0f172a !important;
+  border-color: #1e293b;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .highlight pre {
+  background: #0f172a;
+}
+
+[data-md-color-scheme="slate"] .md-typeset .highlight .filename {
+  background: #020617;
+  border-bottom-color: #1e293b;
 }
 
 [data-md-color-scheme="slate"] .md-typeset code {
-  background: linear-gradient(135deg, #2a2a3e, #3a3a4e);
+  background: #1e293b;
   color: var(--ef-primary-text);
-  border-color: #4a4a5e;
+  border-color: #334155;
 }
 
 .md-clipboard {
-  color: var(--ef-gray-400) !important;
+  color: #64748b !important;
 }
 .md-clipboard:hover {
-  color: var(--ef-primary) !important;
+  color: #e2e8f0 !important;
 }
+
+/* Pygments 구문 강조 — 다크 테마 (라이트/다크 모드 공통) */
+.highlight .hll { background-color: #334155; }
+.highlight .c, .highlight .c1, .highlight .cm, .highlight .cs, .highlight .ch { color: #64748b; font-style: italic; }  /* 주석 */
+.highlight .k, .highlight .kn, .highlight .kd, .highlight .kp, .highlight .kr { color: #c084fc; font-weight: 600; }  /* 키워드 */
+.highlight .nb, .highlight .bp { color: #22d3ee; }  /* 내장 함수 */
+.highlight .nf, .highlight .fm { color: #34d399; }  /* 함수명 */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sr, .highlight .ss { color: #fbbf24; }  /* 문자열 */
+.highlight .mi, .highlight .mf, .highlight .mh, .highlight .mo, .highlight .mb, .highlight .il { color: #f97316; }  /* 숫자 */
+.highlight .o, .highlight .ow { color: #f472b6; }  /* 연산자 */
+.highlight .n, .highlight .na, .highlight .nc, .highlight .nd, .highlight .ni, .highlight .ne, .highlight .nl, .highlight .nn, .highlight .no, .highlight .nt, .highlight .nv { color: #e2e8f0; }  /* 일반 이름 */
+.highlight .p { color: #94a3b8; }  /* 구두점 */
+.highlight .nc { color: #38bdf8; font-weight: 600; }  /* 클래스명 */
+.highlight .nd { color: #a78bfa; }  /* 데코레이터 */
+.highlight .err { color: #f87171; }  /* 에러 */
 
 /* ============================================================
    체크리스트 (학습 목표) - 교육 최적화
@@ -593,8 +643,7 @@ summary:focus-visible {
   color: #f1f5f9;
 }
 
-.md-typeset mark,
-.md-typeset .highlight {
+.md-typeset mark {
   background: linear-gradient(120deg, #fef08a 0%, #fde68a 100%);
   padding: 0.1em 0.35em;
   border-radius: 4px;
